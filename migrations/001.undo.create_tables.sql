@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS clients;
+
+DROP TABLE IF EXISTS securityitems;
+
+DROP TABLE IF EXISTS categories;
+
+DROP TABLE IF EXISTS status;
+
