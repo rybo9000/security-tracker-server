@@ -1,16 +1,43 @@
 const express = require("express");
-const StatusService = require("./categories-service");
+const StatusService = require("./status-service");
 
 const StatusRouter = express.Router();
 const jsonParser = express.json();
 
 StatusRouter.route("/")
-    .get((req, res, next) => {
-        const knexInstance = req.app.get("db");
+  .get((req, res, next) => {
+    const { id } = req.query;
 
-        // RETURN ALL STATUS ENTRIES
+    const knexInstance = req.app.get("db");
 
-        StatusService.addStatus(knexInstance, status, clientid, securityitem)
-            .then((results) => res.status(200).json(results))
-            .catch(next);
-    })
+    // RETURN ALL STATUS ENTRIES
+
+    StatusService.getStatusWithName(knexInstance)
+      .then((results) => {
+        let response = results;
+        if (id) {
+          response = response.filter((itm) => itm.clientid === Number(id));
+        }
+        return res.status(200).json(response);
+      })
+      .catch(next);
+  })
+  .patch(jsonParser, (req, res, next) => {
+    let { id, value } = req.body;
+
+    if (!id) {
+      return res.status(400).json({ error: "ID is required!" });
+    }
+
+    // if (!value) {
+    //     return res.status(400).json({ error: "Value is required!" });
+    // }
+
+    const knexInstance = req.app.get("db");
+
+    StatusService.toggleStatus(knexInstance, id, value).then((response) =>
+      res.json(response)
+    );
+  });
+
+module.exports = StatusRouter;
