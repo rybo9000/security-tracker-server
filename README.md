@@ -1,26 +1,55 @@
-# Express Boilerplate!
+# SECURITY TRACKER API
 
-This is a boilerplate project used for starting new projects!
+## The Back-End application which allows an MSP to track the security posture of their clients
 
-## Set up
+**[FRONT-END GITHUB LINK](https://github.com/rybo9000/security-tracker)**
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+### What technology is this built with?
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+- NODEJS
+- EXPRESSJS
+- POSTGRESQL
 
-## Scripts
+### How Does It Work?
 
-Start the application `npm start`
+1. The system consists of Clients, Security Items, and Categories.
+2. A Category defines a grouping of related Security Items.
+3. A Security Item defines an aspect of security a managed client might have installed such as Antivirus or Web Filtering.
+4. A Security Item MUST be assigned to a Category.
+5. After defining the appropriate Security Items and Categories you can then create and adjust the active Security Items for different clients.
+6. Lastly, you can run a report on a client to view their overall posture score.
 
-Start nodemon for the application `npm run dev`
+### Current Endpoints V 1.0 _(Refactor Coming Soon)_
 
-Run the tests `npm test`
+**GET - /api/categories**
+_Return all categories_
 
-## Deploying
+**POST - /api/categories**
+_Create a new category_
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+**GET - /api/clients**
+_Return all clients_
+
+**POST - /api/clients**
+_Create a new client_
+
+**GET - /api/clients/:id**
+_Return a single client by ID_
+
+**GET - /api/securityitems**
+_Return all Security Items_
+
+**POST - /api/securityitems**
+_Create a new Security Item_
+
+**GET - /api/status**
+_Return all status entries_
+
+**GET - /api/status?id=XXXX**
+_Return a status entry by ID_
+
+**PATCH - /api/status**
+_Toggle the true / false column of a status row by ID_
+
+**GET - /api/status/name**
+_Return all status entries with the name returned instead of ID_

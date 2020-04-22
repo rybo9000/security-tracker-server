@@ -1,7 +1,9 @@
 const StatusService = {
+  // SELECT ALL ENTRIES IN STATUS TABLE
   getStatus(knex) {
     return knex.select("*").from("status");
   },
+  // GET ALL ENTRIES IN STATUS TABLE BUT JOIN NAME FIELD
   getStatusWithName(knex) {
     return knex
       .select(
@@ -14,6 +16,7 @@ const StatusService = {
       .join("securityitems", "status.securityitem", "=", "securityitems.id")
       .orderBy("securityitems.name");
   },
+  // ADD A NEW STATUS ENTRY
   addStatus(knex, clientid, securityitem) {
     return knex
       .insert({ status: false, clientid: clientid, securityitem: securityitem })
@@ -23,6 +26,7 @@ const StatusService = {
         return rows[0];
       });
   },
+  // UPDATE A STATUS ENTRY TO NEW VALUE
   toggleStatus(knex, id, value) {
     return knex("status").where({ id }).update({ status: value });
   },
