@@ -12,7 +12,7 @@ StatusRouter.route("/")
 
     // RETURN ALL STATUS ENTRIES
 
-    StatusService.getStatusWithName(knexInstance)
+    StatusService.getStatus(knexInstance)
       .then((results) => {
         let response = results;
         if (id) {
@@ -39,5 +39,23 @@ StatusRouter.route("/")
       res.json(response)
     );
   });
+
+StatusRouter.route("/name").get((req, res, next) => {
+  const { id } = req.query;
+
+  const knexInstance = req.app.get("db");
+
+  // RETURN ALL STATUS ENTRIES
+
+  StatusService.getStatusWithName(knexInstance)
+    .then((results) => {
+      let response = results;
+      if (id) {
+        response = response.filter((itm) => itm.clientid === Number(id));
+      }
+      return res.status(200).json(response);
+    })
+    .catch(next);
+});
 
 module.exports = StatusRouter;
