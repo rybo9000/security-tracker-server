@@ -25,14 +25,4 @@ describe("SECURITYITEMS Endpoints", function () {
       })
       .expect(200);
   });
-
-  it.skip("POST /api/securityitems responds with 201", () => {
-    return supertest(app)
-      .post("/api/clients")
-      .send({
-        name: "test_name22",
-        category: "Repeatable",
-      })
-      .expect(201);
-  });
 });

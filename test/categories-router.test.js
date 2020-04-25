@@ -26,12 +26,21 @@ describe("CATEGORIES Endpoints", function () {
       .expect(200);
   });
 
-  it.skip("POST /api/categories responds with 200", () => {
+  it("POST /api/categories responds with 201", () => {
+    const newCategoryName = {
+      name: "New Test Name" + Math.random(),
+    };
+
     return supertest(app)
       .post("/api/categories")
-      .send({
-        name: "test_name2",
-      })
-      .expect(200);
+      .send(newCategoryName)
+      .expect(201)
+      .expect((res) => {
+        expect(res.body.name).to.eql(newCategoryName.name);
+      });
+    //   .then(postRes => {
+    //     return supertest(app)
+    //     .get(`/api/categories`)
+    // })
   });
 });

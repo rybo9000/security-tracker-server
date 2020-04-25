@@ -33,7 +33,7 @@ CategoriesRouter.route("/")
         // INSERT CATEGORY INTO DATABASE
 
         CategoriesService.addCategory(knexInstance, name)
-          .then((result) => res.json(result))
+          .then((result) => res.status(201).json(result))
           .catch(next);
       })
       .catch(next);

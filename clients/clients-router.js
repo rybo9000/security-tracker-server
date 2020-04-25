@@ -44,7 +44,7 @@ ClientsRouter.route("/")
                     StatusService.addStatus(knexInstance, id, result.id);
                   });
                 }
-                res.status(201).json({ notification: "Success!" });
+                res.status(201).json(result);
               }
             );
           })

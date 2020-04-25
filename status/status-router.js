@@ -53,7 +53,7 @@ StatusRouter.route("/name").get((req, res, next) => {
       if (id) {
         response = response.filter((itm) => itm.clientid === Number(id));
       }
-      return res.status(200).json(response);
+      return res.status(201).json(response);
     })
     .catch(next);
 });

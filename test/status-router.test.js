@@ -25,13 +25,4 @@ describe("STATUS Endpoints", function () {
       })
       .expect(200);
   });
-
-  it.skip("PATCH /api/clients responds with 201", () => {
-    return supertest(app)
-      .patch("/api/status")
-      .send({
-        id: "22",
-      })
-      .expect(201);
-  });
 });

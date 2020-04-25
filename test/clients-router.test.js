@@ -26,13 +26,18 @@ describe("CLIENTS Endpoints", function () {
       .expect(200);
   });
 
-  it.skip("POST /api/clients responds with 201", () => {
+  it("POST /api/clients responds with 201", () => {
+    const newClientName = {
+      name: "New Test Name" + Math.random(),
+    };
+
     return supertest(app)
       .post("/api/clients")
-      .send({
-        name: "test_name22",
-      })
-      .expect(201);
+      .send(newClientName)
+      .expect(201)
+      .expect((res) => {
+        expect(res.body.name).to.eql(newClientName.name);
+      });
   });
 
   it("GET /api/clients/:id responds with 200", () => {
